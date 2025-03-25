@@ -1,4 +1,4 @@
-package com.example.dictonary
+package com.example.dictionary
 
 import org.junit.Test
 

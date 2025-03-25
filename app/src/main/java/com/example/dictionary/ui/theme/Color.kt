@@ -1,4 +1,4 @@
-package com.example.dictonary.ui.theme
+package com.example.dictionary.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.example.dictonary
+package com.example.dictionary
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.dictonary.ui.theme.DictonaryTheme
+import com.example.dictionary.ui.theme.DictonaryTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
