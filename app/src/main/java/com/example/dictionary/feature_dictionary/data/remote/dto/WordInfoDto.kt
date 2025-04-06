@@ -16,15 +16,16 @@ data class WordInfoDto(
     @SerializedName("sourceUrls")
     val sourceUrls: List<String>,
     @SerializedName("word")
-    val word: String
+    val word: String,
+    @SerializedName("origin")
+    val origin: String
 ) {
     fun toWordInfo(): WordInfo {
         return WordInfo(
-            license = license,
             meanings = meanings.map { it.toMeaning() },
             phonetic = phonetic,
-            sourceUrls = sourceUrls,
-            word = word
+            word = word,
+            origin = origin
         )
     }
 }
