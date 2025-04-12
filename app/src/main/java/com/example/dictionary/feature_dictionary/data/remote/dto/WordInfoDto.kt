@@ -1,6 +1,7 @@
 package com.example.dictionary.feature_dictionary.data.remote.dto
 
 
+import com.example.dictionary.feature_dictionary.data.local.entry.WordInfoEntity
 import com.example.dictionary.feature_dictionary.domain.model.WordInfo
 import com.google.gson.annotations.SerializedName
 
@@ -20,8 +21,8 @@ data class WordInfoDto(
     @SerializedName("origin")
     val origin: String
 ) {
-    fun toWordInfo(): WordInfo {
-        return WordInfo(
+    fun toWordInfoEntity(): WordInfoEntity {
+        return WordInfoEntity(
             meanings = meanings.map { it.toMeaning() },
             phonetic = phonetic,
             word = word,
