@@ -8,9 +8,9 @@ data class DefinitionDto(
     @SerializedName("antonyms")
     val antonyms: List<Any>,
     @SerializedName("definition")
-    val definition: String,
+    val definition: String?,
     @SerializedName("example")
-    val example: String,
+    val example: String?,
     @SerializedName("synonyms")
     val synonyms: List<String>
 ) {

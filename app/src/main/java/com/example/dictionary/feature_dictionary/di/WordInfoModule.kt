@@ -2,6 +2,7 @@ package com.example.dictionary.feature_dictionary.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.dictionary.feature_dictionary.data.local.Converters
 import com.example.dictionary.feature_dictionary.data.local.WordInfoDatabase
 import com.example.dictionary.feature_dictionary.data.remote.DictionaryApi
 import com.example.dictionary.feature_dictionary.data.repository.WordInfoRepositoryImpl
@@ -13,6 +14,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -42,14 +45,24 @@ object WordInfoModule {
     @Singleton
     fun provideWordInfoDatabase(app: Application): WordInfoDatabase {
         return Room.databaseBuilder(app, WordInfoDatabase::class.java, "word_db")
-            .addTypeConverter(GsonParser(Gson()))
+            .addTypeConverter(Converters(GsonParser(Gson())))
             .build()
     }
 
     @Provides
     @Singleton
     fun provideDictionaryApi(app: Application): DictionaryApi {
-        return Retrofit.Builder().baseUrl(DictionaryApi.BASE_URL)
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl(DictionaryApi.BASE_URL)
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(DictionaryApi::class.java)
