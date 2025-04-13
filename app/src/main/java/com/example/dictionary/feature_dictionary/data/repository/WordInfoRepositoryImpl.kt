@@ -36,7 +36,7 @@ class WordInfoRepositoryImpl(private val api: DictionaryApi, private val dao: Wo
         }
 
         val newWordInfo = dao.getWordInfos(word).map { it.toWordInfo() }
-        emit(Resource.Success(wordInfo))
+        emit(Resource.Success(newWordInfo))
 
     }
 }
